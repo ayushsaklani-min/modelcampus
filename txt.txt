@@ -1,0 +1,150 @@
+ormbreaker@Anurags-MacBook-Air 12 % python train_model_finetuned.py
+zsh: command not found: python
+stormbreaker@Anurags-MacBook-Air 12 % python train_model_finetuned_fast.py
+zsh: command not found: python
+stormbreaker@Anurags-MacBook-Air 12 % python3 train_model_finetuned_fast.py
+======================================================================
+Fast Fine-Tuned Time-to-Failure Prediction Model Training
+======================================================================
+
+[1/7] Loading dataset...
+Dataset loaded: 77762 rows, 21 columns
+
+[2/7] Data preprocessing and feature engineering...
+Missing values per column:
+Series([], dtype: int64)
+
+[3/7] Creating additional features...
+Original features: 20
+Features after engineering: 31
+New features added: 11
+
+Categorical features: 8
+Numerical features: 23
+
+[4/7] Encoding categorical variables...
+
+[5/7] Handling missing values...
+
+[6/7] Splitting data into train/test sets...
+Training set: 62209 samples
+Test set: 15553 samples
+
+[7/7] Training and fine-tuning models (fast mode)...
+======================================================================
+Using 10000 samples for hyperparameter tuning (for speed)
+
+----------------------------------------------------------------------
+Fine-tuning Random Forest Regressor (fast mode)...
+----------------------------------------------------------------------
+Running hyperparameter search...
+Fitting 3 folds for each of 10 candidates, totalling 30 fits
+
+Best Parameters: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': 30}
+  Train MAE: 22.07 days
+  Test MAE: 46.74 days
+  CV MAE: 61.07 days
+  Train RMSE: 29.52 days
+  Test RMSE: 61.82 days
+  Train R²: 0.9138
+  Test R²: 0.6181
+
+----------------------------------------------------------------------
+Fine-tuning XGBoost Regressor (fast mode)...
+----------------------------------------------------------------------
+Running hyperparameter search...
+Fitting 3 folds for each of 15 candidates, totalling 45 fits
+
+Best Parameters: {'subsample': 0.8, 'reg_lambda': 2, 'reg_alpha': 0, 'n_estimators': 400, 'min_child_weight': 5, 'max_depth': 8, 'learning_rate': 0.05, 'colsample_bytree': 0.7}
+  Train MAE: 38.23 days
+  Test MAE: 49.30 days
+  CV MAE: 60.18 days
+  Train RMSE: 49.87 days
+  Test RMSE: 64.68 days
+  Train R²: 0.7539
+  Test R²: 0.5819
+
+----------------------------------------------------------------------
+Training Improved XGBoost (optimized defaults)...
+----------------------------------------------------------------------
+  Train MAE: 34.09 days
+  Test MAE: 47.22 days
+  CV MAE: 60.51 days
+  Train RMSE: 44.83 days
+  Test RMSE: 62.55 days
+  Train R²: 0.8012
+  Test R²: 0.6090
+
+======================================================================
+Model Comparison Summary
+======================================================================
+
+🏆 Best Model: RandomForest_Tuned
+  Test R² Score: 0.6181
+  Test MAE: 46.74 days
+  Test RMSE: 61.82 days
+  CV MAE: 61.07 days
+
+All Models Performance:
+
+RandomForest_Tuned:
+  Test R²: 0.6181
+  Test MAE: 46.74 days
+  Test RMSE: 61.82 days
+  CV MAE: 61.07 days
+
+XGBoost_Tuned:
+  Test R²: 0.5819
+  Test MAE: 49.30 days
+  Test RMSE: 64.68 days
+  CV MAE: 60.18 days
+
+XGBoost_Improved:
+  Test R²: 0.6090
+  Test MAE: 47.22 days
+  Test RMSE: 62.55 days
+  CV MAE: 60.51 days
+
+======================================================================
+Top 15 Most Important Features
+======================================================================
+  days_since_maintenance: 0.1442
+  year: 0.0816
+  maintenance_ratio: 0.0697
+  age_maintenance_interaction: 0.0680
+  month: 0.0594
+  model: 0.0485
+  equipment_age_years: 0.0478
+  equipment_age_days: 0.0464
+  maintenance_frequency: 0.0391
+  maintenance_cycle_days: 0.0387
+  area_per_floor: 0.0327
+  equipment_type: 0.0293
+  total_area_sqm: 0.0285
+  cost_estimate: 0.0274
+  season: 0.0272
+
+======================================================================
+Saving model and preprocessing objects...
+======================================================================
+✓ Saved: best_model.pkl
+✓ Saved: label_encoders.pkl
+✓ Saved: scaler.pkl
+✓ Saved: feature_info.pkl
+✓ Saved: model_results_finetuned.csv
+✓ Saved: best_hyperparameters.json
+
+======================================================================
+Fine-Tuning Complete!
+======================================================================
+
+Best model (RandomForest_Tuned) saved and ready for deployment.
+
+Files created:
+  - best_model.pkl (fine-tuned model)
+  - label_encoders.pkl (categorical encoders)
+  - scaler.pkl (feature scaler)
+  - feature_info.pkl (feature metadata)
+  - model_results_finetuned.csv (performance metrics)
+  - best_hyperparameters.json (optimal hyperparameters)
+stormbreaker@Anurags-MacBook-Air 12 % 
