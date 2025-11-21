@@ -17,7 +17,9 @@ from typing import Iterable
 def iter_install_scripts(root: Path) -> Iterable[Path]:
     if not root.is_dir():
         return []
-    return root.rglob("bentos/*/env/python/install.sh")
+    # Bento store layout: <home>/bentos/<service>/<tag>/env/python/install.sh
+    # Use glob instead of rglob so we can control depth and work cross-platform.
+    return root.glob("bentos/*/*/env/python/install.sh")
 
 
 def normalize_file(path: Path) -> bool:
