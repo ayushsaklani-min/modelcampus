@@ -8,6 +8,7 @@ import os
 from typing import Any, Dict, List
 
 import bentoml
+from bentoml import legacy
 from bentoml.io import JSON
 
 from model_predictor import TimeToFailurePredictor
@@ -30,7 +31,7 @@ def _validate_payload(payload: Dict[str, Any]) -> List[str]:
 
 
 predictor = TimeToFailurePredictor(model_dir=MODEL_DIR)
-svc = bentoml.Service("failure_predictor")
+svc = legacy.Service("failure_predictor")
 
 
 @svc.api(input=JSON(), output=JSON())

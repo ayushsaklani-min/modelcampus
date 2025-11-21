@@ -83,3 +83,25 @@ The API expects equipment data, NOT location/category data:
 
 Use the provided `test-api-correct.js` file which has the correct format!
 
+
+## Bento Build & Deployment Workflow
+
+When you run `bentoml build` on Windows, BentoML generates Bash scripts with Windows line endings, which can break remote Linux builders. Use the new helper targets and hook to avoid this:
+
+1. **Build using Make:**  
+   ```powershell
+   make build
+   ```  
+   This runs `bentoml build` and then normalizes every generated `env/python/install.sh`.
+
+2. **Enable the provided Git hook once per clone:**  
+   ```powershell
+   git config core.hooksPath .githooks
+   ```  
+   The `pre-push` hook automatically normalizes any install scripts before pushing so you never forget.
+
+3. **Manual normalization (optional):**  
+   If you just need the normalization step, run:
+   ```powershell
+   make normalize-bento-install
+   ```

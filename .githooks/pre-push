@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v make >/dev/null 2>&1; then
+  make normalize-bento-install
+else
+  echo "[pre-push] 'make' not found; skipping Bento install normalization" >&2
+fi
+
